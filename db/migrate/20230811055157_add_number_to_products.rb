@@ -1,4 +1,0 @@
-class AddNumberToProducts < ActiveRecord::Migration[7.0]
-  def change
-  end
-end
