@@ -1,5 +1,6 @@
 
 class Vendor < ApplicationRecord
+    has_many :customers
     has_many :products
     
     validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }

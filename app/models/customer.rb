@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
-    has_many :carts
+    
+    has_one :carts
     
     validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
