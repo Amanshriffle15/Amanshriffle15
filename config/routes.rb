@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   resources :users do
     resource :user_profile, only: [:show, :create, :update, :destroy]
   end
+
+  resources :products do
+    member do
+      get 'recommend_products_by_brand', to: 'products#recommend_by_brand'
+    end
+  end
 end

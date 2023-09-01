@@ -1,5 +1,15 @@
 class ProductsController < ApplicationController
-  
+
+  def recommend_by_brand
+    user = UserProfile.find(params[:user_id])
+    puts "user#{user.favourite_brand}"
+    favorite_brand = user.favourite_brand
+
+    recommended_products = Product.where(brand_name: favorite_brand)
+
+    render json: recommended_products, status: 200
+  end
+
   def search
     product_name = params[:product_name]
     
@@ -8,7 +18,7 @@ class ProductsController < ApplicationController
       render json: products
     else
 
-      render json: { error: 'Please provide a product name for the search' }, status: :unprocessable_entity
+      render json: { error: 'Please provide a product name for the search' }
     end
   end
 
@@ -20,7 +30,7 @@ class ProductsController < ApplicationController
   def create
     if params[:user_id] && params[:user_type]
       if params[:user_type] == "customer"
-          render json: { error: 'Customers are not allowed to create products' }, status: :unprocessable_entity
+          render json: { error: 'Customers are not allowed to create products' } 
           return
       end
       
@@ -28,7 +38,7 @@ class ProductsController < ApplicationController
       
     
       if product.save
-        product_variant = product.product_variants.create(length: 0, width: 0)  # Create a ProductVariant  with the Product
+        product_variant = product.product_variants.create(length: 0, width: 0)  
         render json: { product: product, product_variant: product_variant }, status: :created
       else
         render json: { errors: product.errors.full_messages }

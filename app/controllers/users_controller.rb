@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       user.update(user_params)
       render json: user, status: 200
     else
-      render json: {error: "Article Not Found"}
+      render json: {error: "User Not Found"}
     end
   end
   
@@ -44,6 +44,7 @@ class UsersController < ApplicationController
       render json: "User not found", status:204
     end
   end
+
     
 	private
   def user_params

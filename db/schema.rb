@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_111208) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_051825) do
   create_table "product_variants", force: :cascade do |t|
     t.integer "length"
     t.integer "width"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_111208) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "user_type"
+    t.string "brand_name"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
