@@ -1,13 +1,13 @@
 class UserProfilesController < ApplicationController
 
   def index
-    users = Userprofile.all
+    users = UserProfile.all
     render json: users
   end
 
   def show
     
-    user_profile = Userprofile.find_by(user_id: params[:user_id])
+    user_profile = UserProfile.find_by(user_id: params[:user_id])
     
 
     if user_profile
@@ -18,18 +18,18 @@ class UserProfilesController < ApplicationController
   end
     
   def create
-    user_profile = Userprofile.new(user_profile_params)
-   
-    
+
+    user_profile = UserProfile.create(user_profile_params)
+
     if user_profile.save
-      render json: user_profile, status: :created
+      render json: user_profile, status: 201
     else
       render json: { errors: user_profile.errors.full_messages }
     end
   end
   
   def update
-    user_profile = Userprofile.find_by(user_id: params[:user_id])
+    user_profile = UserProfile.find_by(user_id: params[:user_id])
     
     if user_profile.update(user_profile_params)
       render json: user_profile
@@ -39,7 +39,7 @@ class UserProfilesController < ApplicationController
   end
 
   def destroy
-    user = Userprofile.find_by(id: params[:id])
+    user = UserProfile.find_by(id: params[:id])
     if user
       user.destroy
       render json: "Userprofile has been deleted"

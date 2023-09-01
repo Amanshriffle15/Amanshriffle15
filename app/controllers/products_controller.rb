@@ -3,9 +3,9 @@ class ProductsController < ApplicationController
   def recommend_by_brand
     user = UserProfile.find(params[:user_id])
     puts "user#{user.favourite_brand}"
-    favorite_brand = user.favourite_brand
+    favourite_brand = user.favourite_brand
 
-    recommended_products = Product.where(brand_name: favorite_brand)
+    recommended_products = Product.where(brand_name: favourite_brand)
 
     render json: recommended_products, status: 200
   end
@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
     product = Product.find_by( params[:id])
     if product
       product.destroy
-      render json: product , status: 204
+      render json: "Product deleted" , status: 204
     else
       render json: "Product not found"
     end
@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :user_type,:user_id)
+    params.require(:product).permit(:name, :price, :user_type,:user_id, :brand_name)
   end
 end
   
